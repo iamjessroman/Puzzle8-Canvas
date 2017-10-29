@@ -1,7 +1,7 @@
 var array = [
-            [1 , 2 ,3],
-            [4 , 6 ,''],
-            [7, 8,5 ]
+            [1 , 2 ,3 ],
+            [4 , 5 ,6 ],
+            [7 , 8 ,'']
             ];
 var colors= [
             ['#FA5858', '#ACFA58', '#CC2EFA'],
@@ -11,12 +11,11 @@ var colors= [
 
 
 window.onload = function(e){
-    draw(array);
-      // array=shuffle(array);
+  array=shuffle(array);
+  draw(array);
 }
 
 function siguiente(){
-  // array=shuffle(array);
   draw(array);
 }
 
@@ -129,12 +128,12 @@ function Movimientos_3(array,PosEspacio){
   var PosEspacioj = PosEspacio[1];
   //Punto (1,0)
   if(PosEspacioi===1&&PosEspacioj===0){
-  if (array[PosEspacioi][PosEspacioj-1]<array[PosEspacioi+2][PosEspacioj]) {
-    array[PosEspacioi][PosEspacioj]=array[PosEspacioi][PosEspacioj-1];
-    array[PosEspacioi][PosEspacioj-1]="";
+  if (array[2][0]<array[1][1]) {
+    array[PosEspacioi][PosEspacioj]=array[2][0];
+    array[2][0]="";
   }else {
-    array[PosEspacioi][PosEspacioj]=array[PosEspacioi+2][PosEspacioj];
-    array[PosEspacioi+2][PosEspacioj]="";
+    array[PosEspacioi][PosEspacioj]=array[1][1];
+    array[1][1]="";
   }
   }
   //Punto (2,1)
