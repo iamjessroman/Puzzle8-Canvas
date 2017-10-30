@@ -113,15 +113,15 @@ function Movimientos_4(array,PosEspacio){
   var PosEspacioi = PosEspacio[0];
   var PosEspacioj = PosEspacio[1];
 //Punto (1,1)
+var n1=[array[1][0],'',array[1][2]];
+var n2=[array[0][1],'',array[2][1]];
+var num1=Mayor(n1);
+var num2=Mayor(n2);
 
-   if (array[Mayor(array[1]),1]>array[0,1]) {
-   array[PosEspacioi][PosEspacioj]=array[Mayor(array[1]),1]
-   array[Mayor(array[1]),1]="";
- }else {
-   array[PosEspacioi][PosEspacioj]=array[0][1];
-   array[0][1]="";
- }
-
+if(array[1][num1]>array[num2][1]){
+  array[PosEspacioi][PosEspacioj]=array[1][num1];
+  array[1][num1]="";
+}
 }
 
 function Movimientos_3(array,PosEspacio){
@@ -161,9 +161,9 @@ if (array[1][1]<array[0][2]) {
 
 //Punto (0,1)
 if(PosEspacioi===0&&PosEspacioj===1){
-if (array[0,Menor(array[0])]<array[1][1]) {
-  array[PosEspacioi][PosEspacioj]=array[0][1];
-  array[0][1]="";
+if (array[0][Mayor(array[0])]>array[1][1]) {
+  array[PosEspacioi][PosEspacioj]=array[0][Mayor(array[0])];
+  array[0][Mayor(array[0])]="";
 }else {
   array[PosEspacioi][PosEspacioj]=array[1][1];
   array[1][1]="";
@@ -173,13 +173,11 @@ if (array[0,Menor(array[0])]<array[1][1]) {
 
 function Mayor(array){
   var max=Math.max.apply(null, array);
-  alert(max);
   return array.indexOf(max);
 }
 
 function Menor(array){
   var min=Math.min.apply(null, array);
-  alert(min);
   return array.indexOf(min);
 }
 
