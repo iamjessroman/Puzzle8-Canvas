@@ -1,7 +1,7 @@
 var array = [
-            [3 , '' ,8 ],
-            [4 , 7 ,1 ],
-            [5 , 6 ,2]
+            [1,2,3 ],
+            [4,5,6 ],
+            [7,8,'']
             ];
 var colors= [
             ['#FA5858', '#ACFA58', '#CC2EFA'],
@@ -11,7 +11,7 @@ var colors= [
 
 
 window.onload = function(e){
-//  array=shuffle(array);
+ array=shuffle(array);
   draw(array);
 }
 
