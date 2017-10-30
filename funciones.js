@@ -1,7 +1,7 @@
 var array = [
-            [1 , 2 ,3 ],
-            [4 , 5 ,6 ],
-            [7 , 8 ,'']
+            [3 , '' ,8 ],
+            [4 , 7 ,1 ],
+            [5 , 6 ,2]
             ];
 var colors= [
             ['#FA5858', '#ACFA58', '#CC2EFA'],
@@ -11,7 +11,7 @@ var colors= [
 
 
 window.onload = function(e){
-  array=shuffle(array);
+//  array=shuffle(array);
   draw(array);
 }
 
@@ -173,9 +173,10 @@ if (array[1][1]<array[0][2]) {
 
 //Punto (0,1)
 if(PosEspacioi===0&&PosEspacioj===1){
-if (array[0][Mayor(array[0])]>array[1][1]) {
+if (array[0][Mayor(array[0])]<array[1][1]) {
   array[PosEspacioi][PosEspacioj]=array[0][Mayor(array[0])];
   array[0][Mayor(array[0])]="";
+
 }else {
   array[PosEspacioi][PosEspacioj]=array[1][1];
   array[1][1]="";
