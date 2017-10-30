@@ -8,11 +8,11 @@ var colors= [
             ['#FAAC58', '#2ECCFA', '#FA58D0'],
             ['#F7D358', '#2E64FE', '#FE2E64']
             ];
-
-
+var rand=0;
+var movimientos='0';
 window.onload = function(e){
  array=shuffle(array);
-  draw(array);
+ draw(array);
 }
 
 function siguiente(){
@@ -37,6 +37,14 @@ function draw(array) {
       y++;
     }
   }
+
+  var moves = document.getElementById('moves');
+  if (moves.getContext) {
+    var ctx2 = moves.getContext('2d');
+    ctx2.clearRect(0, 0, moves.width, moves.height);
+    ctx2.font= "64px Arial";
+    ctx2.fillText(movimientos,60,120);
+}
  NumMovimientos(array);
 }
 
@@ -76,122 +84,135 @@ var PosEspacioj = PosEspacio[1];
 var numPosib;
 if (PosEspacioi!==1 && PosEspacioj!==1) {
   numPosib=2;
-Movimientos_2(array,PosEspacio);
+Opciones_2(array,PosEspacio);
 }else if (PosEspacioi==1 && PosEspacioj==1) {
   numPosib=4;
-  Movimientos_4(array,PosEspacio);
+  Opciones_4(array,PosEspacio);
   }else if (PosEspacioi==1 || PosEspacioj==1) {
   numPosib=3;
-  Movimientos_3(array,PosEspacio);
+  Opciones_3(array,PosEspacio);
   }
 }
 
-function Movimientos_2(array,PosEspacio){
+function Opciones_2(array,PosEspacio){
 //  alert(PosEspacio);
   var PosEspacioi = PosEspacio[0];
   var PosEspacioj = PosEspacio[1];
   //Punto 0,0
   if (PosEspacioi==0 && PosEspacioj==0) {
-     if (array[1][0]<array[PosEspacioi][PosEspacioj+1]) {
-          array[PosEspacioi][PosEspacioj]=array[1][0];
-          array[1][0]="";
-     }else {
-       array[PosEspacioi][PosEspacioj]=array[PosEspacioi][PosEspacioj+1];
-       array[PosEspacioi][PosEspacioj+1]="";
-     }
+    var myArray=[array[0][1],array[1][0]];
+    var menor = Menor(myArray);
+    var Pos= Posicion(array,menor);
+    array[PosEspacioi][PosEspacioj]=array[Pos[0]][Pos[1]];
+    array[Pos[0]][Pos[1]]="";
+    movimientos++;
   }
   //Punto 2,0
   if (PosEspacioi==2 && PosEspacioj==0) {
-          array[PosEspacioi][PosEspacioj]=array[PosEspacioi][PosEspacioj+1];
-          array[PosEspacioi][PosEspacioj+1]="";
+    var myArray=[array[2][1],array[1][0]];
+    var mayor = Mayor(myArray);
+    var Pos= Posicion(array,mayor);
+    array[PosEspacioi][PosEspacioj]=array[Pos[0]][Pos[1]];
+    array[Pos[0]][Pos[1]]="";
+    movimientos++;
   }
 
   //Punto 0,2
   if (PosEspacioi==0 && PosEspacioj==2) {
-     if (array[1][2]<array[0][2]) {
-       array[PosEspacioi][PosEspacioj]=array[0][2];
-       array[0][2]="";
-     }else {
-       array[PosEspacioi][PosEspacioj]=array[0][1];
-       array[0][1]="";
-     }
+    var myArray=[array[0][1],array[1][2]];
+    var menor = Menor(myArray);
+    var Pos= Posicion(array, menor);
+    array[PosEspacioi][PosEspacioj]=array[Pos[0]][Pos[1]];
+    array[Pos[0]][Pos[1]]="";
+    movimientos++;
   }
     //Punto 2,2
     if (PosEspacioi==2 && PosEspacioj==2) {
-            array[PosEspacioi][PosEspacioj]=array[1][2];
-            array[1][2]="";
+      var myArray=[array[2][1],array[1][2]];
+      var mayor = Mayor(myArray);
+      var Pos= Posicion(array,mayor);
+      array[PosEspacioi][PosEspacioj]=array[Pos[0]][Pos[1]];
+      array[Pos[0]][Pos[1]]="";
+      movimientos++;
     }
 }
 
-function Movimientos_4(array,PosEspacio){
-  var PosEspacioi = PosEspacio[0];
-  var PosEspacioj = PosEspacio[1];
-//Punto (1,1)
-
-var myArray=[array[0][1],array[1][0],array[1][2],array[2][1]];
-var rand = myArray[Math.floor(Math.random() * myArray.length)];
-var Pos= Posicion(array,rand);
-
-array[PosEspacioi][PosEspacioj]=array[Pos[0]][Pos[1]];
-array[Pos[0]][Pos[1]]="";
-}
-
-function Movimientos_3(array,PosEspacio){
+function Opciones_3(array,PosEspacio){
   var PosEspacioi = PosEspacio[0];
   var PosEspacioj = PosEspacio[1];
   //Punto (1,0)
   if(PosEspacioi===1&&PosEspacioj===0){
-  if (array[2][0]<array[1][1]) {
-    array[PosEspacioi][PosEspacioj]=array[2][0];
-    array[2][0]="";
-  }else {
-    array[PosEspacioi][PosEspacioj]=array[1][1];
-    array[1][1]="";
-  }
+    var myArray=[array[0][0],array[1][1],array[2][0]];
+    var mayor = Mayor(myArray);
+    var Pos= Posicion(array,mayor);
+    array[PosEspacioi][PosEspacioj]=array[Pos[0]][Pos[1]];
+    array[Pos[0]][Pos[1]]="";
+    movimientos++;
   }
   //Punto (2,1)
   if(PosEspacioi===2&&PosEspacioj===1){
-  if (array[2][Mayor(array[2])]>array[1][1]) {
-    array[PosEspacioi][PosEspacioj]=array[2][Mayor(array[2])];
-    array[2][Mayor(array[2])]="";
-  }else {
-    array[PosEspacioi][PosEspacioj]=array[1][1];
-    array[1][1]="";
-  }
+    var myArray=[array[2][2],array[1][1],array[2][0]];
+    var menor = Menor(myArray);
+    var Pos= Posicion(array,menor);
+    array[PosEspacioi][PosEspacioj]=array[Pos[0]][Pos[1]];
+    array[Pos[0]][Pos[1]]="";
+    movimientos++;
 }
 
 //Punto (1,2)
 if(PosEspacioi===1&&PosEspacioj===2){
-if (array[1][1]<array[0][2]) {
-  array[PosEspacioi][PosEspacioj]=array[0][2];
-  array[0][2]="";
-}else {
-  array[PosEspacioi][PosEspacioj]=array[1][1];
-  array[1][1]="";
-}
+  var myArray=[array[2][2],array[1][1],array[0][2]];
+  var mayor = Mayor(myArray);
+  var Pos= Posicion(array,mayor);
+  array[PosEspacioi][PosEspacioj]=array[Pos[0]][Pos[1]];
+  array[Pos[0]][Pos[1]]="";
+  movimientos++;
 }
 
 //Punto (0,1)
 if(PosEspacioi===0&&PosEspacioj===1){
-if (array[0][Mayor(array[0])]<array[1][1]) {
-  array[PosEspacioi][PosEspacioj]=array[0][Mayor(array[0])];
-  array[0][Mayor(array[0])]="";
+  var myArray=[array[0][0],array[1][1],array[0][2]];
+  var menor = Menor(myArray);
+  var Pos= Posicion(array,menor);
+  array[PosEspacioi][PosEspacioj]=array[Pos[0]][Pos[1]];
+  array[Pos[0]][Pos[1]]="";
+  movimientos++;
+}
+}
 
+function Opciones_4(array,PosEspacio){
+  var PosEspacioi = PosEspacio[0];
+  var PosEspacioj = PosEspacio[1];
+
+//Punto (1,1)
+
+var myArray=[array[0][1],array[1][0],array[1][2],array[2][1]];
+if(rand===0){
+  var mayor = Mayor(myArray);
+  var Pos= Posicion(array,mayor);
+  array[PosEspacioi][PosEspacioj]=array[Pos[0]][Pos[1]];
+  array[Pos[0]][Pos[1]]="";
+  movimientos++;
+  rand++;
 }else {
-  array[PosEspacioi][PosEspacioj]=array[1][1];
-  array[1][1]="";
+  var menor = Menor(myArray);
+  var Pos= Posicion(array,menor);
+  array[PosEspacioi][PosEspacioj]=array[Pos[0]][Pos[1]];
+  array[Pos[0]][Pos[1]]="";
+  movimientos++;
+  rand=0;
 }
 }
-}
+
 
 function Mayor(array){
   var max=Math.max.apply(null, array);
-  return array.indexOf(max);
+  return (max);
 }
 
 function Menor(array){
   var min=Math.min.apply(null, array);
-  return array.indexOf(min);
+  return(min);
 }
 
 function shuffle(array){
