@@ -54,6 +54,20 @@ function EspacioBlanco(array){
   return [espacioi,espacioj]
 }
 
+function Posicion(array,valor){
+ var posi;
+ var posj;
+  for (var i = 0; i <3; i++) {
+    for (var j = 0; j <3; j++) {
+    if(array[i][j]===valor){
+    posi=i;
+    posj=j;
+  }
+  }
+  }
+  return [posi,posj]
+}
+
 function NumMovimientos(array){
 
 var PosEspacio = EspacioBlanco(array);
@@ -113,15 +127,13 @@ function Movimientos_4(array,PosEspacio){
   var PosEspacioi = PosEspacio[0];
   var PosEspacioj = PosEspacio[1];
 //Punto (1,1)
-var n1=[array[1][0],'',array[1][2]];
-var n2=[array[0][1],'',array[2][1]];
-var num1=Mayor(n1);
-var num2=Mayor(n2);
 
-if(array[1][num1]>array[num2][1]){
-  array[PosEspacioi][PosEspacioj]=array[1][num1];
-  array[1][num1]="";
-}
+var myArray=[array[0][1],array[1][0],array[1][2],array[2][1]];
+var rand = myArray[Math.floor(Math.random() * myArray.length)];
+var Pos= Posicion(array,rand);
+
+array[PosEspacioi][PosEspacioj]=array[Pos[0]][Pos[1]];
+array[Pos[0]][Pos[1]]="";
 }
 
 function Movimientos_3(array,PosEspacio){
@@ -139,9 +151,9 @@ function Movimientos_3(array,PosEspacio){
   }
   //Punto (2,1)
   if(PosEspacioi===2&&PosEspacioj===1){
-  if (array[2,Mayor(array[2])]>array[1][1]) {
-    array[PosEspacioi][PosEspacioj]=array[2][2];
-    array[2][2]="";
+  if (array[2][Mayor(array[2])]>array[1][1]) {
+    array[PosEspacioi][PosEspacioj]=array[2][Mayor(array[2])];
+    array[2][Mayor(array[2])]="";
   }else {
     array[PosEspacioi][PosEspacioj]=array[1][1];
     array[1][1]="";
