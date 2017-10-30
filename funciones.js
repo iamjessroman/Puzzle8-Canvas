@@ -94,31 +94,32 @@ function Movimientos_2(array,PosEspacio){
 
   //Punto 0,2
   if (PosEspacioi==0 && PosEspacioj==2) {
-     if (array[1][2]<array[PosEspacioi][PosEspacioj-1]) {
-          array[PosEspacioi][PosEspacioj]=array[1][2];
-          array[1][2]="";
+     if (array[1][2]<array[0][2]) {
+       array[PosEspacioi][PosEspacioj]=array[0][2];
+       array[0][2]="";
      }else {
-       array[PosEspacioi][PosEspacioj]=array[PosEspacioi][PosEspacioj-1];
-       array[PosEspacioi][PosEspacioj-1]="";
+       array[PosEspacioi][PosEspacioj]=array[0][1];
+       array[0][1]="";
      }
   }
     //Punto 2,2
     if (PosEspacioi==2 && PosEspacioj==2) {
-            array[PosEspacioi][PosEspacioj]=array[PosEspacioi][PosEspacioj-1];
-            array[PosEspacioi][PosEspacioj-1]="";
+            array[PosEspacioi][PosEspacioj]=array[1][2];
+            array[1][2]="";
     }
 }
 
 function Movimientos_4(array,PosEspacio){
   var PosEspacioi = PosEspacio[0];
   var PosEspacioj = PosEspacio[1];
+//Punto (1,1)
 
- if (array[1][2]<array[2][1]) {
-   array[PosEspacioi][PosEspacioj]=array[PosEspacioi][PosEspacioj+1];
-   array[PosEspacioi][PosEspacioj+1]="";
+   if (array[Mayor(array[1]),1]>array[0,1]) {
+   array[PosEspacioi][PosEspacioj]=array[Mayor(array[1]),1]
+   array[Mayor(array[1]),1]="";
  }else {
-   array[PosEspacioi][PosEspacioj]=array[PosEspacioi+1][PosEspacioj];
-   array[PosEspacioi+1][PosEspacioj]="";
+   array[PosEspacioi][PosEspacioj]=array[0][1];
+   array[0][1]="";
  }
 
 }
@@ -138,38 +139,49 @@ function Movimientos_3(array,PosEspacio){
   }
   //Punto (2,1)
   if(PosEspacioi===2&&PosEspacioj===1){
-  if (array[1][1]<array[2][2]) {
-    array[PosEspacioi][PosEspacioj]=array[1][1];
-    array[1][1]="";
-  }else {
+  if (array[2,Mayor(array[2])]>array[1][1]) {
     array[PosEspacioi][PosEspacioj]=array[2][2];
     array[2][2]="";
+  }else {
+    array[PosEspacioi][PosEspacioj]=array[1][1];
+    array[1][1]="";
   }
 }
 
 //Punto (1,2)
 if(PosEspacioi===1&&PosEspacioj===2){
 if (array[1][1]<array[0][2]) {
-  array[PosEspacioi][PosEspacioj]=array[1][1];
-  array[1][1]="";
-}else {
   array[PosEspacioi][PosEspacioj]=array[0][2];
   array[0][2]="";
+}else {
+  array[PosEspacioi][PosEspacioj]=array[1][1];
+  array[1][1]="";
 }
 }
 
 //Punto (0,1)
 if(PosEspacioi===0&&PosEspacioj===1){
-if (array[1][1]<array[0][2]) {
+if (array[0,Menor(array[0])]<array[1][1]) {
+  array[PosEspacioi][PosEspacioj]=array[0][1];
+  array[0][1]="";
+}else {
   array[PosEspacioi][PosEspacioj]=array[1][1];
   array[1][1]="";
-}else {
-  array[PosEspacioi][PosEspacioj]=array[0][2];
-  array[0][2]="";
 }
 }
 }
 
+function Mayor(array){
+  var max=Math.max.apply(null, array);
+  alert(max);
+  return array.indexOf(max);
+}
+
+function Menor(array){
+  var min=Math.min.apply(null, array);
+  alert(min);
+  return array.indexOf(min);
+}
 
 function shuffle(array){
   array=shufflex(array);
